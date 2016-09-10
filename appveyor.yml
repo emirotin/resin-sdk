@@ -14,7 +14,7 @@ matrix:
 # what combinations to test
 environment:
   matrix:
-    - nodejs_version: 0.10
+    - nodejs_version: 4
       RESINTEST_EMAIL: 'test2+juan@resin.io'
       RESINTEST_USERNAME: 'test2_juan'
       RESINTEST_USERID: 5616
@@ -39,7 +39,8 @@ build: off
 test_script:
   - node --version
   - npm --version
-  - cmd: gulp test
+  - cmd: npm test
+  - ps: npm test
 
 notifications:
 

@@ -19,8 +19,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "gulp test",
-    "prepublish": "gulp build",
+    "test": "npm run test-node",
+    "test-node": "gulp test",
+    "prepublish": "npm test && gulp build",
     "docs": "jsdoc2md build/{,**/}*.js > DOCUMENTATION.md"
   },
   "author": "Juan Cruz Viotti <juan@resin.io>",

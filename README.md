@@ -58,7 +58,7 @@ You also have to provide the following environment variables from an account tha
 Run the test suite by doing:
 
 ```sh
-$ gulp test
+$ npm test
 ```
 
 Contribute
