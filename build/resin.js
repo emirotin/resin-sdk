@@ -75,6 +75,7 @@ limitations under the License.
   apiKey?
   dataDirectory?
   imageMakerUrl
+  debug
    */
 
   getSdk = function(opts) {
