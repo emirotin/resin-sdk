@@ -136,8 +136,10 @@ getDeviceModel = (deps, opts) ->
 				resource: 'device'
 				options:
 					filter:
-						application:
-							app_name: name
+						application: $any:
+							$alias: 'a'
+							$expr: a:
+								app_name: name
 					expand: 'application'
 					orderby: 'name asc'
 
@@ -179,7 +181,6 @@ getDeviceModel = (deps, opts) ->
 			options:
 				expand: 'application'
 				filter:
-
 					# Handle shorter uuids by asserting
 					# that it is a substring of the device
 					# uuid starting at index zero.

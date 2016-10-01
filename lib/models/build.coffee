@@ -54,8 +54,10 @@ getBuildModel = (deps, opts) ->
 			return pine.get
 				resource: 'build'
 				filter:
-					application:
-						app_name: name
+					application: $any:
+						$alias: 'a'
+						$expr: a:
+							app_name: name
 				select: [
 					'id'
 					'created_at'
