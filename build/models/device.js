@@ -120,7 +120,7 @@ limitations under the License.
       }).map(function(device) {
         device.application_name = device.application[0].app_name;
         return device;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -172,7 +172,7 @@ limitations under the License.
       }).map(function(device) {
         device.application_name = device.application[0].app_name;
         return device;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -224,7 +224,7 @@ limitations under the License.
         }
       }).get(0).tap(function(device) {
         return device.application_name = device.application[0].app_name;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -265,7 +265,7 @@ limitations under the License.
       }).map(function(device) {
         device.application_name = device.application[0].app_name;
         return device;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -291,7 +291,7 @@ limitations under the License.
     	 * });
      */
     exports.getName = function(uuid, callback) {
-      return exports.get(uuid).get('name').nodeify(callback);
+      return exports.get(uuid).get('name').asCallback(callback);
     };
 
     /**
@@ -317,7 +317,7 @@ limitations under the License.
     	 * });
      */
     exports.getApplicationName = function(uuid, callback) {
-      return exports.get(uuid).get('application_name').nodeify(callback);
+      return exports.get(uuid).get('application_name').asCallback(callback);
     };
 
     /**
@@ -357,7 +357,7 @@ limitations under the License.
               method: 'GET'
             }
           });
-        }).get('body').nodeify(callback);
+        }).get('body').asCallback(callback);
       });
     };
 
@@ -386,7 +386,7 @@ limitations under the License.
     exports.has = function(uuid, callback) {
       return exports.get(uuid)["return"](true)["catch"](errors.ResinDeviceNotFound, function() {
         return false;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -412,7 +412,7 @@ limitations under the License.
     	 * });
      */
     exports.isOnline = function(uuid, callback) {
-      return exports.get(uuid).get('is_online').nodeify(callback);
+      return exports.get(uuid).get('is_online').asCallback(callback);
     };
 
     /**
@@ -451,7 +451,7 @@ limitations under the License.
         }
         ips = device.ip_address.split(' ');
         return without(ips, device.vpn_address);
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -482,7 +482,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -513,7 +513,7 @@ limitations under the License.
             uuid: device.uuid
           }
         });
-      })["return"](void 0).nodeify(callback);
+      })["return"](void 0).asCallback(callback);
     };
 
     /**
@@ -549,7 +549,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -585,7 +585,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -627,7 +627,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -668,7 +668,7 @@ limitations under the License.
             timeout: CONTAINER_ACTION_ENDPOINT_TIMEOUT
           });
         });
-      }).get('body').get('containerId').nodeify(callback);
+      }).get('body').get('containerId').asCallback(callback);
     };
 
     /**
@@ -709,7 +709,7 @@ limitations under the License.
             timeout: CONTAINER_ACTION_ENDPOINT_TIMEOUT
           });
         });
-      }).get('body').get('containerId').nodeify(callback);
+      }).get('body').get('containerId').asCallback(callback);
     };
 
     /**
@@ -743,7 +743,7 @@ limitations under the License.
           baseUrl: apiUrl,
           timeout: CONTAINER_ACTION_ENDPOINT_TIMEOUT
         });
-      }).get('body').nodeify(callback);
+      }).get('body').asCallback(callback);
     };
 
     /**
@@ -789,7 +789,7 @@ limitations under the License.
             deviceId: device.id
           }
         });
-      }).get('body').nodeify(callback);
+      }).get('body').asCallback(callback);
     };
 
     /**
@@ -821,7 +821,7 @@ limitations under the License.
             appId: device.application[0].id
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -859,7 +859,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -900,7 +900,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -935,7 +935,7 @@ limitations under the License.
           return;
         }
         throw error;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -970,7 +970,7 @@ limitations under the License.
           return;
         }
         throw error;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1002,7 +1002,7 @@ limitations under the License.
     exports.getSupportedDeviceTypes = function(callback) {
       return configModel().getDeviceTypes().then(function(deviceTypes) {
         return map(deviceTypes, 'name');
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1037,7 +1037,7 @@ limitations under the License.
           throw new errors.ResinInvalidDeviceType(slug);
         }
         return deviceManifest;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1065,7 +1065,7 @@ limitations under the License.
     exports.getManifestByApplication = function(applicationName, callback) {
       return applicationModel().get(applicationName).get('device_type').then(function(deviceType) {
         return exports.getManifestBySlug(deviceType);
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1135,7 +1135,7 @@ limitations under the License.
           uuid: uuid,
           apiKey: results.apiKey
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1166,7 +1166,7 @@ limitations under the License.
     	 * });
      */
     exports.hasDeviceUrl = function(uuid, callback) {
-      return exports.get(uuid).get('is_web_accessible').nodeify(callback);
+      return exports.get(uuid).get('is_web_accessible').asCallback(callback);
     };
 
     /**
@@ -1201,7 +1201,7 @@ limitations under the License.
             return "https://" + uuid + "." + deviceUrlsBase;
           });
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1235,7 +1235,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1269,7 +1269,7 @@ limitations under the License.
             }
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1306,7 +1306,7 @@ limitations under the License.
             appId: device.application[0].id
           }
         });
-      }).get('body').nodeify(callback);
+      }).get('body').asCallback(callback);
     };
 
     /**
@@ -1342,7 +1342,7 @@ limitations under the License.
             appId: device.application[0].id
           }
         });
-      }).get('body').nodeify(callback);
+      }).get('body').asCallback(callback);
     };
 
     /**
@@ -1377,7 +1377,7 @@ limitations under the License.
             appId: device.application[0].id
           }
         });
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
 
     /**
@@ -1405,7 +1405,7 @@ limitations under the License.
     exports.getStatus = function(uuid, callback) {
       return Promise["try"](function() {
         return deviceStatus.getStatus(uuid).key;
-      }).nodeify(callback);
+      }).asCallback(callback);
     };
     return exports;
   };
