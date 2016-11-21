@@ -1149,7 +1149,7 @@ resin.models.device.generateUUID(function(error, uuid) {
 
 ##### device.register(applicationName, uuid) ⇒ <code>Promise</code>
 **Kind**: static method of <code>[device](#resin.models.device)</code>  
-**Summary**: Register a new device with a Resin.io application  
+**Summary**: Register a new device with a Resin.io application. **Should not be used in the browser.**  
 **Access:** public  
 **Fulfil**: <code>Object</code> - device  
 

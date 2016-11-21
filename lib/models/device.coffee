@@ -43,7 +43,7 @@ CONTAINER_ACTION_ENDPOINT_TIMEOUT = 50000
 
 getDeviceModel = (deps, opts) ->
 	{ pine, request } = deps
-	{ apiUrl, isBrowser } = opts
+	{ apiUrl, isBrowser, isTest } = opts
 
 	configModel = once -> require('./config')(deps, opts)
 	applicationModel = once -> require('./application')(deps, opts)
@@ -1030,7 +1030,7 @@ getDeviceModel = (deps, opts) ->
 	exports.generateUUID = registerDevice.generateUUID
 
 	###*
-	# @summary Register a new device with a Resin.io application
+	# @summary Register a new device with a Resin.io application. **Should not be used in the browser.**
 	# @name register
 	# @public
 	# @function
@@ -1060,7 +1060,7 @@ getDeviceModel = (deps, opts) ->
 	# 	});
 	# });
 	###
-	exports.register = onlyIf(not isBrowser) (applicationName, uuid, callback) ->
+	exports.register = onlyIf(not isBrowser or isTest) (applicationName, uuid, callback) ->
 		Promise.props
 			userId: auth.getUserId()
 			apiKey: applicationModel().getApiKey(applicationName)
